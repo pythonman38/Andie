@@ -1,7 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dkuk01lfbdvvi"]
+[gd_scene load_steps=3 format=3 uid="uid://dkuk01lfbdvvi"]
 
 [ext_resource type="PackedScene" uid="uid://xm3a5j45elv3" path="res://Asset/Scene/GameLevelScene.tscn" id="1_clcit"]
+[ext_resource type="PackedScene" uid="uid://cre15mbwoe2ql" path="res://Game/Scenes/Player.tscn" id="2_plfq4"]
 
 [node name="Node3D" type="Node3D"]
 
-[node name="Node3D" parent="." instance=ExtResource("1_clcit")]
+[node name="Level" parent="." instance=ExtResource("1_clcit")]
+
+[node name="CharacterBody3D" parent="Level" instance=ExtResource("2_plfq4")]

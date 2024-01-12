@@ -1,10 +1,47 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkuk01lfbdvvi"]
+[gd_scene load_steps=5 format=3 uid="uid://dkuk01lfbdvvi"]
 
 [ext_resource type="PackedScene" uid="uid://xm3a5j45elv3" path="res://Asset/Scene/GameLevelScene.tscn" id="1_clcit"]
 [ext_resource type="PackedScene" uid="uid://cre15mbwoe2ql" path="res://Game/Scenes/Player.tscn" id="2_plfq4"]
+[ext_resource type="PackedScene" uid="uid://cs46pylnegv0e" path="res://Game/Scenes/CollectableCoin.tscn" id="3_je372"]
+[ext_resource type="PackedScene" uid="uid://1obnuvywxwo0" path="res://Game/Scenes/UI.tscn" id="4_sjgsw"]
 
 [node name="Node3D" type="Node3D"]
 
 [node name="Level" parent="." instance=ExtResource("1_clcit")]
 
-[node name="CharacterBody3D" parent="Level" instance=ExtResource("2_plfq4")]
+[node name="Player" parent="." instance=ExtResource("2_plfq4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+
+[node name="CollectableCoin" parent="." instance=ExtResource("3_je372")]
+
+[node name="CollectableCoin2" parent="." instance=ExtResource("3_je372")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="CollectableCoin3" parent="." instance=ExtResource("3_je372")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="CollectableCoin4" parent="." instance=ExtResource("3_je372")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="CollectableCoin5" parent="." instance=ExtResource("3_je372")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="CollectableCoin6" parent="." instance=ExtResource("3_je372")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="CollectableCoin7" parent="." instance=ExtResource("3_je372")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -1)
+
+[node name="CollectableCoin8" parent="." instance=ExtResource("3_je372")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2)
+
+[node name="CollectableCoin9" parent="." instance=ExtResource("3_je372")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -3)
+
+[node name="UI" parent="." instance=ExtResource("4_sjgsw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -3)
+
+[node name="Control_GameplayUI" parent="UI" index="0" node_paths=PackedStringArray("player")]
+player = NodePath("../../Player")
+
+[editable path="UI"]

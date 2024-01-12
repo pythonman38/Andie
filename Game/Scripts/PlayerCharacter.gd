@@ -4,6 +4,13 @@ extends CharacterBody3D
 @onready var animationPlayer: AnimationPlayer = $VisualNode/AnimationPlayer
 @onready var footStepVFX: GPUParticles3D = $VisualNode/VFX/Footstep_GPUParticles3D
 
+var coinNumber: int:
+	set(new_value):
+		coinNumber = new_value
+		emit_signal("coinNumberUpdated", coinNumber)
+
+signal coinNumberUpdated(newValue: int)
+
 const SPEED = 5.0
 
 func _physics_process(delta):
@@ -28,3 +35,8 @@ func _physics_process(delta):
 		var lookDir = Vector2(velocity.z, velocity.x)
 		visual.rotation.y = lookDir.angle()
 	move_and_slide()
+
+
+func AddCoin(value: int):
+	coinNumber += value
+	print(coinNumber)

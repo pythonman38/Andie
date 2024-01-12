@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://1obnuvywxwo0"]
+
+[ext_resource type="Script" path="res://Game/Scripts/GameplayUI_Manager.gd" id="1_682o1"]
+[ext_resource type="Texture2D" uid="uid://byo4gdwy76yce" path="res://Asset/UI/Coin.png" id="1_mg271"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7ch4p"]
+font_size = 50
+font_color = Color(1, 0.929412, 0.192157, 1)
+
+[node name="UI" type="Node3D"]
+
+[node name="Control_GameplayUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_682o1")
+
+[node name="HBoxContainer_Coin" type="HBoxContainer" parent="Control_GameplayUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -220.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 92.0
+grow_horizontal = 0
+theme_override_constants/separation = 15
+alignment = 2
+
+[node name="Label_Coin" type="Label" parent="Control_GameplayUI/HBoxContainer_Coin"]
+layout_mode = 2
+text = "0
+"
+label_settings = SubResource("LabelSettings_7ch4p")
+
+[node name="TextureRect_Coin" type="TextureRect" parent="Control_GameplayUI/HBoxContainer_Coin"]
+modulate = Color(1, 0.929412, 0.192157, 1)
+layout_mode = 2
+texture = ExtResource("1_mg271")
+expand_mode = 2

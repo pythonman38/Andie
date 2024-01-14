@@ -4,6 +4,8 @@ extends StateBase
 @export var bladeMaterialEffectAnimationPlayer: AnimationPlayer
 @export var VFX_Blade: Node3D
 
+var damage: int = 40
+
 func enableHitBox():
 	hitBoxCollisionShape.disabled = false
 	print("Hit box disable = ", hitBoxCollisionShape.disabled)
@@ -32,3 +34,8 @@ func exit():
 func state_update(_delta: float):
 	if !animationPlayer.is_playing():
 		state_machine.switchTo("Idle")
+
+
+func _on_hit_box_body_entered(body):
+	if body.is_in_group("Enemy"):
+		body.applyDamage(damage)

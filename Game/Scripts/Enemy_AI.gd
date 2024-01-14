@@ -7,11 +7,14 @@ extends CharacterBody3D
 var player: Node3D
 var direction: Vector3
 var stopDistance: float = 2.2
+var maxHealth: int = 100
+var currentHealth: int
 
 const SPEED: float = 0.5
 
 func _ready():
 	player = get_tree().get_first_node_in_group("Player")
+	currentHealth = maxHealth
 
 
 func _physics_process(delta):
@@ -27,3 +30,9 @@ func _physics_process(delta):
 		var lookDir = Vector2(velocity.z, velocity.x)
 		visual.rotation.y = lookDir.angle()
 	move_and_slide()
+
+
+func applyDamage(damage: int):
+	currentHealth -= damage
+	currentHealth = clamp(currentHealth, 0, maxHealth)
+	print(name, "'s health = ", currentHealth)

@@ -3,6 +3,7 @@ extends CharacterBody3D
 @onready var navAgent: NavigationAgent3D = $NavigationAgent3D
 @onready var visual: Node3D = $VisualNode
 @onready var animationPlayer: AnimationPlayer = $VisualNode/AnimationPlayer
+@onready var materialEffectAnimationPlayer: AnimationPlayer = $VisualNode/MaterialEffectAnimationPlayer
 
 var player: Node3D
 var direction: Vector3
@@ -35,4 +36,4 @@ func _physics_process(delta):
 func applyDamage(damage: int):
 	currentHealth -= damage
 	currentHealth = clamp(currentHealth, 0, maxHealth)
-	print(name, "'s health = ", currentHealth)
+	materialEffectAnimationPlayer.play("Flash")

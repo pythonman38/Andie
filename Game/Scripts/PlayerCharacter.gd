@@ -4,6 +4,10 @@ extends CharacterBody3D
 @onready var animationPlayer: AnimationPlayer = $VisualNode/AnimationPlayer
 @onready var footStepVFX: GPUParticles3D = $VisualNode/VFX/Footstep_GPUParticles3D
 
+var direction: Vector3
+var slideKey_pressed: bool
+var attackKey_pressed: bool
+
 var coinNumber: int:
 	set(new_value):
 		coinNumber = new_value
@@ -20,23 +24,12 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("Left", "Right", "Up", "Down")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-		animationPlayer.play("LittleAdventurerAndie_Run")
-		footStepVFX.emitting = true
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-		animationPlayer.play("LittleAdventurerAndie_Idle")
-		footStepVFX.emitting = false
-	if velocity.length() > 0.2:
-		var lookDir = Vector2(velocity.z, velocity.x)
-		visual.rotation.y = lookDir.angle()
+	direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	slideKey_pressed = Input.is_action_just_pressed("Slide")
+	attackKey_pressed = Input.is_action_just_pressed("Attack")
 	move_and_slide()
 
 
 func AddCoin(value: int):
 	coinNumber += value
-	print(coinNumber)
+

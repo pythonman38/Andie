@@ -16,7 +16,7 @@ func exit():
 	print("exiting state: ", name)
 	
 	
-func state_update(_delta):
+func state_update(_delta: float):
 	pass
 
 

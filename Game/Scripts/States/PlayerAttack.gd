@@ -1,24 +1,32 @@
 extends StateBase
 
 @export var hitBoxCollisionShape: CollisionShape3D
+@export var bladeMaterialEffectAnimationPlayer: AnimationPlayer
+@export var VFX_Blade: Node3D
 
 func enableHitBox():
 	hitBoxCollisionShape.disabled = false
+	print("Hit box disable = ", hitBoxCollisionShape.disabled)
 
 
 func disableHitBox():
 	hitBoxCollisionShape.disabled = true
+	print("Hit box disable = ", hitBoxCollisionShape.disabled)
 	
 	
 func enter():
 	super.enter()
 	character.velocity.x = 0
 	character.velocity.z = 0
+	VFX_Blade.visible = true
+	bladeMaterialEffectAnimationPlayer.stop()
+	bladeMaterialEffectAnimationPlayer.play("PlayBladeVFX")
 	
 	
 func exit():
 	super.exit()
 	disableHitBox()
+	VFX_Blade.visible = false
 	
 	
 func state_update(_delta: float):

@@ -17,7 +17,7 @@ signal coinNumberUpdated(newValue: int)
 
 const SPEED = 5.0
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= 1
@@ -33,3 +33,6 @@ func _physics_process(delta):
 func AddCoin(value: int):
 	coinNumber += value
 
+
+func takeDamage(damage: int):
+	print("The Player took damage :", damage)

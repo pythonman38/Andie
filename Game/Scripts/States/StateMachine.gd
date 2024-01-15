@@ -11,7 +11,6 @@ func _ready():
 		child.state_machine = self
 		child.character = get_parent()
 		child.animationPlayer = get_parent().get_node("VisualNode/AnimationPlayer")
-		child.showInfo()
 	currentState.enter()
 
 

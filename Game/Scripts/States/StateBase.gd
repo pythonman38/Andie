@@ -8,17 +8,12 @@ var animationPlayer: AnimationPlayer
 @export var animationName: String = ''
 
 func enter():
-	print("entering state: ", name)
 	animationPlayer.play(animationName)
 	
 
 func exit():
-	print("exiting state: ", name)
+	pass
 	
 	
 func state_update(_delta: float):
 	pass
-
-
-func showInfo():
-	print(name, "/", character, "/", state_machine)

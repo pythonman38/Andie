@@ -9,5 +9,9 @@ func enter():
 	collisionShape3D.disabled = true
 	await get_tree().create_timer(1).timeout
 	materialEffectAnimationPlayer.play("Dead")
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(2).timeout
+	var dropItem = preload("res://Game/Scenes/CollectableHealingOrb.tscn")
+	var dropItemInstance = dropItem.instantiate()
+	get_tree().get_root().get_node("Node3D").add_child(dropItemInstance)
+	dropItemInstance.global_position = character.global_position
 	character.queue_free()

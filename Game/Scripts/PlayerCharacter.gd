@@ -50,3 +50,8 @@ func takeDamage(damage: int, enemy_position: Vector3):
 	get_node("StateMachine").switchTo("Hurt")
 	if get_node("StateMachine").currentState.name == "Hurt":
 		get_node("StateMachine").currentState.pushBackDir = (global_position - enemy_position).normalized()
+
+
+func AddHealth(value: int):
+	currentHealth += value
+	currentHealth = clamp(currentHealth, 0, maxHealth)

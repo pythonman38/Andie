@@ -14,12 +14,10 @@ var canAttackAgain: bool
 
 func enableHitBox():
 	hitBoxCollisionShape.disabled = false
-	print("Hit box disable = ", hitBoxCollisionShape.disabled)
 
 
 func disableHitBox():
 	hitBoxCollisionShape.disabled = true
-	print("Hit box disable = ", hitBoxCollisionShape.disabled)
 	
 	
 func enter():

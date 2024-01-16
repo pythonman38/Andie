@@ -7,6 +7,11 @@ extends CharacterBody3D
 var direction: Vector3
 var slideKey_pressed: bool
 var attackKey_pressed: bool
+var maxHealth: int = 100
+var currentHealth: int:
+	set(new_value):
+		currentHealth = new_value
+		emit_signal("playerHealthUpdated", currentHealth, maxHealth)
 
 var coinNumber: int:
 	set(new_value):
@@ -14,6 +19,10 @@ var coinNumber: int:
 		emit_signal("coinNumberUpdated", coinNumber)
 
 signal coinNumberUpdated(newValue: int)
+signal playerHealthUpdated(newValue: int, maxValue: int)
+
+func _ready():
+	currentHealth = maxHealth
 
 const SPEED = 5.0
 
@@ -34,5 +43,10 @@ func AddCoin(value: int):
 	coinNumber += value
 
 
-func takeDamage(damage: int):
-	print("The Player took damage :", damage)
+func takeDamage(damage: int, enemy_position: Vector3):
+	currentHealth -= damage
+	currentHealth = clamp(currentHealth, 0, maxHealth)
+	print("The Player took damage: ", damage, "! Current health: ", currentHealth)
+	get_node("StateMachine").switchTo("Hurt")
+	if get_node("StateMachine").currentState.name == "Hurt":
+		get_node("StateMachine").currentState.pushBackDir = (global_position - enemy_position).normalized()

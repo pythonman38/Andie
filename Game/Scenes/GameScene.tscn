@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dkuk01lfbdvvi"]
+[gd_scene load_steps=12 format=3 uid="uid://dkuk01lfbdvvi"]
 
 [ext_resource type="PackedScene" uid="uid://xm3a5j45elv3" path="res://Asset/Scene/GameLevelScene.tscn" id="1_clcit"]
 [ext_resource type="PackedScene" uid="uid://cre15mbwoe2ql" path="res://Game/Scenes/Player.tscn" id="2_plfq4"]
 [ext_resource type="PackedScene" uid="uid://cs46pylnegv0e" path="res://Game/Scenes/CollectableCoin.tscn" id="3_je372"]
 [ext_resource type="PackedScene" uid="uid://1obnuvywxwo0" path="res://Game/Scenes/UI.tscn" id="4_sjgsw"]
+[ext_resource type="Script" path="res://Game/Scripts/GameManager.gd" id="5_muby0"]
 [ext_resource type="PackedScene" uid="uid://dk85svtfcvrhh" path="res://Game/Scenes/Gate.tscn" id="6_1xmg1"]
 [ext_resource type="Script" path="res://Game/Scripts/Spawner.gd" id="6_lrvom"]
 [ext_resource type="PackedScene" uid="uid://dayg1aqxsofwn" path="res://Asset/Environment/Scene/base.tscn" id="7_6daih"]
@@ -26,11 +27,15 @@ size = Vector3(35, 2, 1)
 [node name="Player" parent="." instance=ExtResource("2_plfq4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, -95.5)
 
-[node name="UI" parent="." instance=ExtResource("4_sjgsw")]
+[node name="UI" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_sjgsw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -3)
+player = NodePath("../Player")
 
-[node name="Control_GameplayUI" parent="UI" index="0" node_paths=PackedStringArray("player")]
-player = NodePath("../../Player")
+[node name="GameOver" parent="UI/Control_Game" index="2"]
+visible = true
+
+[node name="GamePause" parent="UI/Control_Game" index="3"]
+visible = false
 
 [node name="Coins" type="Node3D" parent="."]
 visible = false
@@ -67,6 +72,7 @@ navigation_mesh = SubResource("NavigationMesh_46pwp")
 [node name="Level" parent="NavigationRegion3D" instance=ExtResource("1_clcit")]
 
 [node name="GameLevel" type="Node3D" parent="."]
+script = ExtResource("5_muby0")
 
 [node name="Level_01" type="Node3D" parent="GameLevel"]
 script = ExtResource("6_lrvom")
@@ -137,6 +143,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -85)
 [node name="Portal" parent="GameLevel" instance=ExtResource("8_0d8kt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 10, -99.5)
 
+[connection signal="button_up" from="UI/Control_Game/GameFinish/VBoxContainer/ButtonRestart" to="GameLevel" method="_on_button_restart_button_up"]
+[connection signal="button_up" from="UI/Control_Game/GameFinish/VBoxContainer/ButtonMainMenu" to="GameLevel" method="_on_button_main_menu_button_up"]
+[connection signal="button_up" from="UI/Control_Game/GameOver/VBoxContainer/ButtonRestart" to="GameLevel" method="_on_button_restart_button_up"]
+[connection signal="button_up" from="UI/Control_Game/GameOver/VBoxContainer/ButtonMainMenu" to="GameLevel" method="_on_button_main_menu_button_up"]
+[connection signal="button_up" from="UI/Control_Game/GamePause/VBoxContainer/ButtonResume" to="GameLevel" method="_on_button_resume_button_up"]
+[connection signal="button_up" from="UI/Control_Game/GamePause/VBoxContainer/ButtonRestart" to="GameLevel" method="_on_button_restart_button_up"]
+[connection signal="button_up" from="UI/Control_Game/GamePause/VBoxContainer/ButtonMainMenu" to="GameLevel" method="_on_button_main_menu_button_up"]
 [connection signal="body_entered" from="GameLevel/Level_01/SpawnTriggerZone" to="GameLevel/Level_01" method="_on_spawn_trigger_zone_body_entered"]
 [connection signal="body_entered" from="GameLevel/Level_02/SpawnTriggerZone" to="GameLevel/Level_02" method="_on_spawn_trigger_zone_body_entered"]
 [connection signal="body_entered" from="GameLevel/Level_03/SpawnTriggerZone" to="GameLevel/Level_03" method="_on_spawn_trigger_zone_body_entered"]

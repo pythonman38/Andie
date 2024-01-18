@@ -1,7 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://1obnuvywxwo0"]
+[gd_scene load_steps=19 format=3 uid="uid://1obnuvywxwo0"]
 
 [ext_resource type="Script" path="res://Game/Scripts/GameplayUI_Manager.gd" id="1_682o1"]
 [ext_resource type="Texture2D" uid="uid://byo4gdwy76yce" path="res://Asset/UI/Coin.png" id="1_mg271"]
+[ext_resource type="Texture2D" uid="uid://ccawsi43dcwkf" path="res://Asset/UI/Text_YouMadeIt.png" id="3_utbkm"]
+[ext_resource type="Texture2D" uid="uid://ch22horvt7u3o" path="res://Asset/UI/Line.png" id="4_1v0ja"]
+[ext_resource type="Texture2D" uid="uid://dgwtgy78acpav" path="res://Asset/UI/Button_Restart.png" id="5_owpxf"]
+[ext_resource type="Texture2D" uid="uid://c8npx20nnsseq" path="res://Asset/UI/Button_Restart pressed.png" id="6_62lvd"]
+[ext_resource type="Texture2D" uid="uid://c8c1twbjnftaj" path="res://Asset/UI/Button_Restart_hover.png" id="7_4wtd3"]
+[ext_resource type="Texture2D" uid="uid://b3pidqujb0qn2" path="res://Asset/UI/Button_MainMenu.png" id="8_gidry"]
+[ext_resource type="Texture2D" uid="uid://cq4dmmpftf17s" path="res://Asset/UI/Button_MainMenu_pressed.png" id="9_goccn"]
+[ext_resource type="Texture2D" uid="uid://i6y04e36frcg" path="res://Asset/UI/Button_MainMenu_hover.png" id="10_lx024"]
+[ext_resource type="Texture2D" uid="uid://ccxs78bwrumgx" path="res://Asset/UI/Text_GAMEOVER.png" id="11_74aig"]
+[ext_resource type="Texture2D" uid="uid://bpdqrpwukluk0" path="res://Asset/UI/Text_PAUSE.png" id="12_j00ph"]
+[ext_resource type="Texture2D" uid="uid://biu3q2ejc2rio" path="res://Asset/UI/Button_Resume.png" id="13_ulpil"]
+[ext_resource type="Texture2D" uid="uid://cr4g2dpyvgndu" path="res://Asset/UI/Button_Resume_pressed.png" id="14_tmb28"]
+[ext_resource type="Texture2D" uid="uid://boqqrbrayhs18" path="res://Asset/UI/Button_Resume_hover.png" id="15_sr0av"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7ch4p"]
 font_size = 50
@@ -22,6 +35,7 @@ corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [node name="UI" type="Node3D"]
+script = ExtResource("1_682o1")
 
 [node name="Control_GameplayUI" type="Control" parent="."]
 layout_mode = 3
@@ -30,7 +44,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_682o1")
 
 [node name="HBoxContainer_Coin" type="HBoxContainer" parent="Control_GameplayUI"]
 layout_mode = 1
@@ -71,3 +84,143 @@ theme_override_styles/background = SubResource("StyleBoxFlat_ufutr")
 theme_override_styles/fill = SubResource("StyleBoxFlat_rrhl7")
 value = 50.0
 show_percentage = false
+
+[node name="Control_Game" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control_Game"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.376471)
+
+[node name="GameFinish" type="CenterContainer" parent="Control_Game"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control_Game/GameFinish"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="Control_Game/GameFinish/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_utbkm")
+
+[node name="TextureRect2" type="TextureRect" parent="Control_Game/GameFinish/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_1v0ja")
+
+[node name="ButtonRestart" type="TextureButton" parent="Control_Game/GameFinish/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+texture_normal = ExtResource("5_owpxf")
+texture_pressed = ExtResource("6_62lvd")
+texture_hover = ExtResource("7_4wtd3")
+stretch_mode = 3
+
+[node name="ButtonMainMenu" type="TextureButton" parent="Control_Game/GameFinish/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+texture_normal = ExtResource("8_gidry")
+texture_pressed = ExtResource("9_goccn")
+texture_hover = ExtResource("10_lx024")
+stretch_mode = 3
+
+[node name="GameOver" type="CenterContainer" parent="Control_Game"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control_Game/GameOver"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="Control_Game/GameOver/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("11_74aig")
+
+[node name="TextureRect2" type="TextureRect" parent="Control_Game/GameOver/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_1v0ja")
+
+[node name="ButtonRestart" type="TextureButton" parent="Control_Game/GameOver/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+texture_normal = ExtResource("5_owpxf")
+texture_pressed = ExtResource("6_62lvd")
+texture_hover = ExtResource("7_4wtd3")
+stretch_mode = 3
+
+[node name="ButtonMainMenu" type="TextureButton" parent="Control_Game/GameOver/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+texture_normal = ExtResource("8_gidry")
+texture_pressed = ExtResource("9_goccn")
+texture_hover = ExtResource("10_lx024")
+stretch_mode = 3
+
+[node name="GamePause" type="CenterContainer" parent="Control_Game"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control_Game/GamePause"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="Control_Game/GamePause/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("12_j00ph")
+stretch_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="Control_Game/GamePause/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_1v0ja")
+
+[node name="ButtonResume" type="TextureButton" parent="Control_Game/GamePause/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+texture_normal = ExtResource("13_ulpil")
+texture_pressed = ExtResource("14_tmb28")
+texture_hover = ExtResource("15_sr0av")
+stretch_mode = 3
+
+[node name="ButtonRestart" type="TextureButton" parent="Control_Game/GamePause/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+texture_normal = ExtResource("5_owpxf")
+texture_pressed = ExtResource("6_62lvd")
+texture_hover = ExtResource("7_4wtd3")
+stretch_mode = 3
+
+[node name="ButtonMainMenu" type="TextureButton" parent="Control_Game/GamePause/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+texture_normal = ExtResource("8_gidry")
+texture_pressed = ExtResource("9_goccn")
+texture_hover = ExtResource("10_lx024")
+stretch_mode = 3

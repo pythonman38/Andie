@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5lhot2h6a4e4"]
+
+[ext_resource type="PackedScene" uid="uid://dayg1aqxsofwn" path="res://Asset/Environment/Scene/base.tscn" id="1_6gnqy"]
+[ext_resource type="Script" path="res://Game/Scripts/Spawner.gd" id="1_u2awc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pnafg"]
+size = Vector3(35, 2, 1)
+
+[node name="Level" type="Node3D"]
+script = ExtResource("1_u2awc")
+
+[node name="SpawnPoints" type="Node3D" parent="."]
+
+[node name="SpawnPoint" parent="SpawnPoints" instance=ExtResource("1_6gnqy")]
+
+[node name="SpawnPoint2" parent="SpawnPoints" instance=ExtResource("1_6gnqy")]
+
+[node name="SpawnTriggerZone" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnTriggerZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_pnafg")
+
+[connection signal="body_entered" from="SpawnTriggerZone" to="." method="_on_spawn_trigger_zone_body_entered"]
